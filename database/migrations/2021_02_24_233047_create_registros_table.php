@@ -13,7 +13,7 @@ class CreateRegistrosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Asistencia_Personal', function (Blueprint $table) {
+        Schema::create('asistencia_personal', function (Blueprint $table) {
             $table->id();
             $table->timestamp('fecha');
             $table->char('estado',1);
@@ -23,7 +23,7 @@ class CreateRegistrosTable extends Migration
             $table->foreign('personal_id')->references('id')->on('personal');
         });
 
-        Schema::create('registro_ocurrencias', function (Blueprint $table) {
+        Schema::create('registro_ocurrencia', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion');
             $table->timestamp('fecha');
@@ -55,7 +55,7 @@ class CreateRegistrosTable extends Migration
             $table->foreign('personal_id')->references('id')->on('personal');
         }); */
 
-        Schema::create('registro_sanciones', function (Blueprint $table) {
+        Schema::create('registro_sancion', function (Blueprint $table) {
             $table->id();
             $table->timestamp('fecha');
             $table->string('observacion');
@@ -65,17 +65,17 @@ class CreateRegistrosTable extends Migration
             $table->foreign('personal_id')->references('id')->on('personal');
         });
 
-        Schema::create('justificación_falta', function (Blueprint $table) {
+        Schema::create('justificacion_falta', function (Blueprint $table) {
             $table->id();
             $table->timestamp('fecha_justificacion');
             $table->string('descripcion');
             $table->unsignedBigInteger('registro_sancion_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('registro_sancion_id')->references('id')->on('registro_sanciones');
+            $table->foreign('registro_sancion_id')->references('id')->on('registro_sancion');
         });
 
-        Schema::create('reporte_sanciones', function (Blueprint $table) {
+        Schema::create('reporte_sancion', function (Blueprint $table) {
             $table->id();
             $table->timestamp('fecha_creacion');
             $table->unsignedBigInteger('personal_id');
