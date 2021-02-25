@@ -16,7 +16,7 @@ class CreateTables extends Migration
         Schema::create('registro_paradero', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion');
-            $table->unsignedBigInteger('direccion');
+            $table->string('direccion');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,7 +25,9 @@ class CreateTables extends Migration
             $table->string('nombres');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
-            $table->double('precio');
+            $table->char('telefono',12);
+            $table->string('email')->unique();
+            $table->string('direccion');
             $table->char('tipo',1);
             $table->timestamps();
             $table->softDeletes();
@@ -33,6 +35,9 @@ class CreateTables extends Migration
         Schema::create('contrato_personal', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('personal_id');
+            $table->timestamp('fecha_contrato');
+            $table->timestamp('tiempo')->nullable();
+            $table->double('sueldo');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('personal_id','contrato_has_personal')->references('id')->on('personal');
@@ -119,15 +124,23 @@ class CreateTables extends Migration
             //vehiculo_id?
             $table->foreign('inscripcion_id')->references('id')->on('inscripcion');
         });
-        Schema::create('conductor', function (Blueprint $table) {
+        Schema::create('ficha_conductor', function (Blueprint $table) {
             $table->id();
-            $table->char('dni',8);
-            $table->string('descripcion');
             $table->string('certificado_pnp');
             $table->string('brevete');
             $table->string('fotocheck');
+            $table->char('dni',8);
             $table->string('recibo');
             $table->string('foto');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+        Schema::create('conductor', function (Blueprint $table) {
+            $table->id();
+            $table->timestamp('fecha_contrato');
+            $table->string('observaciones');
+            $table->unsignedBigInteger('ficha_conductor_id');
+            $table->foreign('ficha_conductor_id')->references('id')->on('ficha_conductor');
             $table->timestamps();
             $table->softDeletes();
         });

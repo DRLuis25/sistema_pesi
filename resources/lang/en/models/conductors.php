@@ -6,13 +6,9 @@ return array (
   'fields' => 
   array (
     'id' => 'Id',
-    'dni' => 'Dni',
-    'descripcion' => 'Descripcion',
-    'certificado_pnp' => 'Certificado Pnp',
-    'brevete' => 'Brevete',
-    'fotocheck' => 'Fotocheck',
-    'recibo' => 'Recibo',
-    'foto' => 'Foto',
+    'fecha_contrato' => 'Fecha Contrato',
+    'observaciones' => 'Observaciones',
+    'ficha_conductor_id' => 'Ficha Conductor Id',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
     'deleted_at' => 'Deleted At',

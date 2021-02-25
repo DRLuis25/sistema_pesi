@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class RegistroContable
  * @package App\Models
- * @version February 25, 2021, 5:10 am UTC
+ * @version February 25, 2021, 5:04 pm UTC
  *
  * @property \App\Models\Personal $personal
  * @property number $ingreso

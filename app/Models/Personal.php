@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Personal
  * @package App\Models
- * @version February 25, 2021, 4:55 am UTC
+ * @version February 25, 2021, 5:26 pm UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection $actividads
  * @property \Illuminate\Database\Eloquent\Collection $asistenciaPersonals
@@ -17,19 +17,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Database\Eloquent\Collection $estadoGananciaPerdidas
  * @property \Illuminate\Database\Eloquent\Collection $reclamos
  * @property \Illuminate\Database\Eloquent\Collection $registroContables
- * @property \Illuminate\Database\Eloquent\Collection $registroOcurrencias
+ * @property \Illuminate\Database\Eloquent\Collection $registroOcurrencia
  * @property \Illuminate\Database\Eloquent\Collection $registroPagoBases
  * @property \Illuminate\Database\Eloquent\Collection $registroPagoPersonals
- * @property \Illuminate\Database\Eloquent\Collection $registroSanciones
+ * @property \Illuminate\Database\Eloquent\Collection $registroSancions
  * @property \Illuminate\Database\Eloquent\Collection $registroTorneos
  * @property \Illuminate\Database\Eloquent\Collection $registroTributarios
  * @property \Illuminate\Database\Eloquent\Collection $reglamentos
  * @property \Illuminate\Database\Eloquent\Collection $reporteInspeccions
- * @property \Illuminate\Database\Eloquent\Collection $reporteSanciones
+ * @property \Illuminate\Database\Eloquent\Collection $reporteSancions
  * @property string $nombres
  * @property string $apellidoPaterno
  * @property string $apellidoMaterno
- * @property number $precio
+ * @property string $telefono
+ * @property string $email
+ * @property string $direccion
  * @property string $tipo
  */
 class Personal extends Model
@@ -50,7 +52,9 @@ class Personal extends Model
         'nombres',
         'apellidoPaterno',
         'apellidoMaterno',
-        'precio',
+        'telefono',
+        'email',
+        'direccion',
         'tipo'
     ];
 
@@ -64,7 +68,9 @@ class Personal extends Model
         'nombres' => 'string',
         'apellidoPaterno' => 'string',
         'apellidoMaterno' => 'string',
-        'precio' => 'float',
+        'telefono' => 'string',
+        'email' => 'string',
+        'direccion' => 'string',
         'tipo' => 'string'
     ];
 
@@ -77,7 +83,9 @@ class Personal extends Model
         'nombres' => 'required|string|max:255',
         'apellidoPaterno' => 'required|string|max:255',
         'apellidoMaterno' => 'required|string|max:255',
-        'precio' => 'required|numeric',
+        'telefono' => 'required|string|max:12',
+        'email' => 'required|string|max:255',
+        'direccion' => 'required|string|max:255',
         'tipo' => 'required|string|max:1',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
@@ -143,9 +151,9 @@ class Personal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function registroOcurrencias()
+    public function registroOcurrencia()
     {
-        return $this->hasMany(\App\Models\RegistroOcurrencia::class, 'personal_id');
+        return $this->hasMany(\App\Models\RegistroOcurrencium::class, 'personal_id');
     }
 
     /**
@@ -167,9 +175,9 @@ class Personal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function registroSanciones()
+    public function registroSancions()
     {
-        return $this->hasMany(\App\Models\RegistroSancione::class, 'personal_id');
+        return $this->hasMany(\App\Models\RegistroSancion::class, 'personal_id');
     }
 
     /**
@@ -207,8 +215,8 @@ class Personal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function reporteSanciones()
+    public function reporteSancions()
     {
-        return $this->hasMany(\App\Models\ReporteSancione::class, 'personal_id');
+        return $this->hasMany(\App\Models\ReporteSancion::class, 'personal_id');
     }
 }

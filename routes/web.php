@@ -35,3 +35,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('categorias', 'CategoriaController');
 
 Route::resource('usuarios', 'UsuariosController');
+
+Route::resource('registroParaderos', 'RegistroParaderoController');
+
+
+Route::resource('fichaConductors', 'FichaConductorController');
+
+Route::resource('conductors', 'ConductorController');
+
+Route::resource('inscripcions', 'InscripcionController');
+
+Route::resource('propietarios', 'PropietarioController');
+
+Route::resource('vehiculos', 'VehiculoController');
+
+Route::resource('personals', 'PersonalController');
+
+Route::resource('contratoPersonals', 'ContratoPersonalController');

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Inscripcion
  * @package App\Models
- * @version February 25, 2021, 4:58 am UTC
+ * @version February 25, 2021, 5:21 pm UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection $propietarios
  * @property \Illuminate\Database\Eloquent\Collection $vehiculos

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Propietario
  * @package App\Models
- * @version February 25, 2021, 4:58 am UTC
+ * @version February 25, 2021, 5:22 pm UTC
  *
  * @property \App\Models\Inscripcion $inscripcion
  * @property \Illuminate\Database\Eloquent\Collection $documentoInscripcions

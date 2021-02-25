@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class RegistroParadero
  * @package App\Models
- * @version February 25, 2021, 4:54 am UTC
+ * @version February 25, 2021, 5:04 pm UTC
  *
  * @property string $descripcion
- * @property integer $direccion
+ * @property string $direccion
  */
 class RegistroParadero extends Model
 {
@@ -40,7 +40,7 @@ class RegistroParadero extends Model
     protected $casts = [
         'id' => 'integer',
         'descripcion' => 'string',
-        'direccion' => 'integer'
+        'direccion' => 'string'
     ];
 
     /**
@@ -50,7 +50,7 @@ class RegistroParadero extends Model
      */
     public static $rules = [
         'descripcion' => 'required|string|max:255',
-        'direccion' => 'required',
+        'direccion' => 'required|string|max:255',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'

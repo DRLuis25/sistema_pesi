@@ -48,10 +48,34 @@
         "inView": true
     },
     {
-        "name": "precio",
-        "dbType": "float,10,0",
-        "htmlType": null,
-        "validations": "required|numeric|numeric",
+        "name": "telefono",
+        "dbType": "string,12",
+        "htmlType": "text",
+        "validations": "required|string|max:12|string|max:12",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "email",
+        "dbType": "string,255",
+        "htmlType": "text",
+        "validations": "required|string|max:255|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "direccion",
+        "dbType": "string,255",
+        "htmlType": "text",
+        "validations": "required|string|max:255|string|max:255",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -137,7 +161,7 @@
     },
     {
         "type": "relation",
-        "relation": "1tm,RegistroOcurrencia,personal_id"
+        "relation": "1tm,RegistroOcurrencium,personal_id"
     },
     {
         "type": "relation",
@@ -149,7 +173,7 @@
     },
     {
         "type": "relation",
-        "relation": "1tm,RegistroSancione,personal_id"
+        "relation": "1tm,RegistroSancion,personal_id"
     },
     {
         "type": "relation",
@@ -169,6 +193,6 @@
     },
     {
         "type": "relation",
-        "relation": "1tm,ReporteSancione,personal_id"
+        "relation": "1tm,ReporteSancion,personal_id"
     }
 ]

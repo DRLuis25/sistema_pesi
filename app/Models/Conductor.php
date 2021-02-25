@@ -8,17 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Conductor
  * @package App\Models
- * @version February 25, 2021, 4:59 am UTC
+ * @version February 25, 2021, 5:21 pm UTC
  *
+ * @property \App\Models\FichaConductor $fichaConductor
  * @property \Illuminate\Database\Eloquent\Collection $documentoInscripcions
  * @property \Illuminate\Database\Eloquent\Collection $registroPagoBases
- * @property string $dni
- * @property string $descripcion
- * @property string $certificado_pnp
- * @property string $brevete
- * @property string $fotocheck
- * @property string $recibo
- * @property string $foto
+ * @property string|\Carbon\Carbon $fecha_contrato
+ * @property string $observaciones
+ * @property integer $ficha_conductor_id
  */
 class Conductor extends Model
 {
@@ -35,13 +32,9 @@ class Conductor extends Model
 
 
     public $fillable = [
-        'dni',
-        'descripcion',
-        'certificado_pnp',
-        'brevete',
-        'fotocheck',
-        'recibo',
-        'foto'
+        'fecha_contrato',
+        'observaciones',
+        'ficha_conductor_id'
     ];
 
     /**
@@ -51,13 +44,9 @@ class Conductor extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'dni' => 'string',
-        'descripcion' => 'string',
-        'certificado_pnp' => 'string',
-        'brevete' => 'string',
-        'fotocheck' => 'string',
-        'recibo' => 'string',
-        'foto' => 'string'
+        'fecha_contrato' => 'datetime',
+        'observaciones' => 'string',
+        'ficha_conductor_id' => 'integer'
     ];
 
     /**
@@ -66,17 +55,21 @@ class Conductor extends Model
      * @var array
      */
     public static $rules = [
-        'dni' => 'required|string|max:8',
-        'descripcion' => 'required|string|max:255',
-        'certificado_pnp' => 'required|string|max:255',
-        'brevete' => 'required|string|max:255',
-        'fotocheck' => 'required|string|max:255',
-        'recibo' => 'required|string|max:255',
-        'foto' => 'required|string|max:255',
+        'fecha_contrato' => 'required',
+        'observaciones' => 'required|string|max:255',
+        'ficha_conductor_id' => 'required',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function fichaConductor()
+    {
+        return $this->belongsTo(\App\Models\FichaConductor::class, 'ficha_conductor_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
