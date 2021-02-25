@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('contrato_personal_id','contrato_foreign_1')->references('id')->on('contrato_personal');
+            //$table->foreign('contrato_personal_id','contrato_foreign_1')->references('id')->on('contrato_personal');
         });
     }
 
