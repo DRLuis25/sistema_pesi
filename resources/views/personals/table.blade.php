@@ -20,10 +20,11 @@
                         <a href="{{ route('personals.show', [$personal->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('personals.edit', [$personal->id]) }}" class='btn btn-default btn-xs'>
-                        <i class="far fa-edit"></i>
-                        </a>
-                        
+                        @role('Administrador')
+                            <a href="{{ route('personals.edit', [$personal->id]) }}" class='btn btn-default btn-xs'>
+                            <i class="far fa-edit"></i>
+                            </a>
+                        @endrole
                     </div>
                     {!! Form::close() !!}
                 </td>

@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\ContratoPersonal;
 use App\Models\Personal;
 use App\Models\Usuarios;
+use App\User;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\DB;
@@ -68,11 +69,23 @@ class PersonalController extends AppBaseController
                 'tiempo' => $request->tiempo,
                 'sueldo' => $request->sueldo,
             ]);
-            $user = Usuarios::create([
+            $usuario = Usuarios::create([
                 'email' => $request->email,
                 'contrato_personal_id' => $contrato->id,
                 'password' => '$2y$10$cuf37o9lN0IkRFv73Q7IB.c5bDqCvog845XuTKHxSbMep/D04mknG',
             ]);
+            if($request->tipo=="2"){
+                $user = User::where('id','=',$usuario->id)->first();
+                $user->assignRole('Gerente');
+            }
+            elseif ($request->tipo=="3") {
+                $user = User::where('id','=',$usuario->id)->first();
+                $user->assignRole('Administrador');
+            }
+            elseif ($request->tipo=="1") {
+                $user = User::where('id','=',$usuario->id)->first();
+                $user->assignRole('Operador');
+            }
             DB::commit();
             Flash::success(__('messages.saved', ['model' => __('models/personals.singular')]));
             return redirect(route('personals.index'));
@@ -135,21 +148,41 @@ class PersonalController extends AppBaseController
      */
     public function update($id, UpdatePersonalRequest $request)
     {
-        /** @var Personal $personal */
-        $personal = Personal::find($id);
+        try {
+            DB::beginTransaction();
+            /** @var Personal $personal */
+            $personal = Personal::find($id);
+            if (empty($personal)) {
+                Flash::error(__('messages.not_found', ['model' => __('models/personals.singular')]));
 
-        if (empty($personal)) {
+                return redirect(route('personals.index'));
+            }
+            $personal->fill($request->all());
+            $personal->save();
+            $contratoPersonal = ContratoPersonal::where('personal_id','=',$personal->id)->first();
+            $usuario = Usuarios::where('contrato_personal_id','=',$contratoPersonal->id)->first();
+            $user = User::where('id','=',$usuario->id)->first();
+            if($request->tipo=="2"){
+                
+                $user->roles()->detach();
+                $user->assignRole('Gerente');
+            }
+            elseif ($request->tipo=="3") {
+                $user->roles()->detach();
+                $user->assignRole('Administrador');
+            }
+            elseif ($request->tipo=="1") {
+                $user->roles()->detach();
+                $user->assignRole('Operador');
+            }
+            DB::commit();
+            Flash::success(__('messages.updated', ['model' => __('models/personals.singular')]));
+            return redirect(route('personals.index'));
+        } catch (\Throwable $th) {
             Flash::error(__('messages.not_found', ['model' => __('models/personals.singular')]));
-
             return redirect(route('personals.index'));
         }
-
-        $personal->fill($request->all());
-        $personal->save();
-
-        Flash::success(__('messages.updated', ['model' => __('models/personals.singular')]));
-
-        return redirect(route('personals.index'));
+        
     }
 
     /**

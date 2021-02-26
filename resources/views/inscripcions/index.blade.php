@@ -7,12 +7,14 @@
                 <div class="col-sm-6">
                     <h1>@lang('models/inscripcions.plural')</h1>
                 </div>
+                @role('Administrador')
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('inscripcions.create') }}">
                        @lang('crud.add_new')
                     </a>
                 </div>
+                @endrole
             </div>
         </div>
     </section>

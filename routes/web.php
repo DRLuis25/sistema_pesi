@@ -13,42 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/', 'HomeController@index')->name('home');
 Route::resource('categorias', 'CategoriaController');
-
-Route::resource('usuarios', 'UsuariosController');
-
 Route::resource('registroParaderos', 'RegistroParaderoController');
-
-
-Route::resource('fichaConductors', 'FichaConductorController');
-
 Route::resource('conductors', 'ConductorController');
-
 Route::resource('inscripcions', 'InscripcionController');
-
 Route::resource('propietarios', 'PropietarioController');
-
 Route::resource('vehiculos', 'VehiculoController');
 
-Route::resource('personals', 'PersonalController');
-
-Route::resource('contratoPersonals', 'ContratoPersonalController');
+Route::group(['middleware' => ['role:Administrador']], function () {
+    Route::resource('usuarios', 'UsuariosController');
+    Route::resource('fichaConductors', 'FichaConductorController');
+    Route::resource('personals', 'PersonalController');
+    Route::resource('contratoPersonals', 'ContratoPersonalController');
+});
