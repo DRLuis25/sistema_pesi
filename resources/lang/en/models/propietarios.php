@@ -6,9 +6,14 @@ return array (
   'fields' => 
   array (
     'id' => 'Id',
-    'inscripcion_id' => 'Inscripcion Id',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
+    'dni' => 'DNI',
+    'nombre_propietario' => 'Nombre Propietario',
+    'apellidoPaterno_propietario' => 'Apellido Paterno Propietario',
+    'apellidoMaterno_propietario' => 'Apellido Materno Propietario',
+    'telefono_propietario' => 'Telefono Propietario',
+    'created_at' => 'Creado el',
+    'updated_at' => 'Actualizado el',
+    'deleted_at' => 'Eliminado el',
+    'propietario' => 'Propietario',
   ),
 );

@@ -2,19 +2,19 @@
 
 return array (
   'singular' => 'Personal',
-  'plural' => 'Personals',
+  'plural' => 'Personal',
   'fields' => 
   array (
     'id' => 'Id',
     'nombres' => 'Nombres',
-    'apellidoPaterno' => 'Apellidopaterno',
-    'apellidoMaterno' => 'Apellidomaterno',
-    'telefono' => 'Telefono',
+    'apellidoPaterno' => 'Apellido Paterno',
+    'apellidoMaterno' => 'Apellido Materno',
+    'telefono' => 'Teléfono',
     'email' => 'Email',
-    'direccion' => 'Direccion',
-    'tipo' => 'Tipo',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
+    'direccion' => 'Dirección',
+    'tipo' => 'Cargo',
+    'created_at' => 'Creado el',
+    'updated_at' => 'Actualizado el',
+    'deleted_at' => 'Eliminado el',
   ),
 );

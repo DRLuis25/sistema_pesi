@@ -1,15 +1,15 @@
 <?php
 
 return array (
-  'singular' => 'RegistroParadero',
-  'plural' => 'RegistroParaderos',
+  'singular' => 'Paradero',
+  'plural' => 'Paraderos',
   'fields' => 
   array (
     'id' => 'Id',
-    'descripcion' => 'Descripcion',
-    'direccion' => 'Direccion',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
+    'descripcion' => 'Descripción',
+    'direccion' => 'Dirección',
+    'created_at' => 'Creado el',
+    'updated_at' => 'Actualizado el',
+    'deleted_at' => 'Eliminado el',
   ),
 );

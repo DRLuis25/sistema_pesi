@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Conductor
  * @package App\Models
- * @version February 25, 2021, 5:21 pm UTC
+ * @version February 25, 2021, 8:36 pm UTC
  *
  * @property \App\Models\FichaConductor $fichaConductor
  * @property \Illuminate\Database\Eloquent\Collection $documentoInscripcions
@@ -56,7 +56,15 @@ class Conductor extends Model
      */
     public static $rules = [
         'fecha_contrato' => 'required',
-        'observaciones' => 'required|string|max:255',
+        'observaciones' => 'nullable|string|max:255',
+        'ficha_conductor_id' => 'required|unique:conductor',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
+    ];
+    public static $updateRules = [
+        'fecha_contrato' => 'required',
+        'observaciones' => 'nullable|string|max:255',
         'ficha_conductor_id' => 'required',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',

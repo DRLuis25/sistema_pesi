@@ -32,6 +32,12 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{ route('propietarios.index') }}"
+       class="nav-link {{ Request::is('propietarios*') ? 'active' : '' }}">
+        <p>@lang('models/propietarios.plural')</p>
+    </a>
+</li>
 
 <li class="nav-item">
     <a href="{{ route('inscripcions.index') }}"
@@ -41,12 +47,6 @@
 </li>
 
 
-<li class="nav-item">
-    <a href="{{ route('propietarios.index') }}"
-       class="nav-link {{ Request::is('propietarios*') ? 'active' : '' }}">
-        <p>@lang('models/propietarios.plural')</p>
-    </a>
-</li>
 
 
 <li class="nav-item">
@@ -71,5 +71,3 @@
         <p>@lang('models/contratoPersonals.plural')</p>
     </a>
 </li>
-
-

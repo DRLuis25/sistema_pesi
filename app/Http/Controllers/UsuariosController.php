@@ -12,11 +12,13 @@ use Response;
 
 class UsuariosController extends AppBaseController
 {
+    
     /** @var  UsuariosRepository */
     private $usuariosRepository;
 
     public function __construct(UsuariosRepository $usuariosRepo)
     {
+        $this->middleware('auth');
         $this->usuariosRepository = $usuariosRepo;
     }
 

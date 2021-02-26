@@ -2,32 +2,30 @@
     <table class="table" id="inscripcions-table">
         <thead>
             <tr>
+                <th>@lang('models/inscripcions.fields.propietario_id')</th>
                 <th>@lang('models/inscripcions.fields.tarjeta_propiedad')</th>
-        <th>@lang('models/inscripcions.fields.soat_afocat')</th>
-        <th>@lang('models/inscripcions.fields.certificado_gps')</th>
-        <th>@lang('models/inscripcions.fields.certificado_gas')</th>
-        <th>@lang('models/inscripcions.fields.revision_tecnica')</th>
-        <th>@lang('models/inscripcions.fields.dni')</th>
-        <th>@lang('models/inscripcions.fields.nombre_propietario')</th>
-        <th>@lang('models/inscripcions.fields.apellidoPaterno_propietario')</th>
-        <th>@lang('models/inscripcions.fields.apellidoMaterno_propietario')</th>
-        <th>@lang('models/inscripcions.fields.telefono_propietario')</th>
+                <th>@lang('models/inscripcions.fields.estado')</th>
                 <th colspan="3">@lang('crud.action')</th>
             </tr>
         </thead>
         <tbody>
         @foreach($inscripcions as $inscripcion)
             <tr>
-                <td>{{ $inscripcion->tarjeta_propiedad }}</td>
-            <td>{{ $inscripcion->soat_afocat }}</td>
-            <td>{{ $inscripcion->certificado_gps }}</td>
-            <td>{{ $inscripcion->certificado_gas }}</td>
-            <td>{{ $inscripcion->revision_tecnica }}</td>
-            <td>{{ $inscripcion->dni }}</td>
-            <td>{{ $inscripcion->nombre_propietario }}</td>
-            <td>{{ $inscripcion->apellidoPaterno_propietario }}</td>
-            <td>{{ $inscripcion->apellidoMaterno_propietario }}</td>
-            <td>{{ $inscripcion->telefono_propietario }}</td>
+                <td>
+                    <a href="{{ route('propietarios.show', [$inscripcion->propietario->id]) }}" style=" color: inherit;text-decoration: none">{{ $inscripcion->propietario->fullName }}</a>
+                </td>
+                <td>
+                    @if ($inscripcion->tarjeta_propiedad!=null)
+                        <a href="{{ $inscripcion->tarjeta_propiedad }}" style=" color: inherit;text-decoration: none">ver tarjeta propiedad</a>
+                    @else
+                        <p>sin tarjeta propiedad</p>
+                    @endif
+                </td>
+                <td>@if ($inscripcion->estado==1)
+                    Aprobado
+                @else
+                    No Aprobado
+                @endif</td>
                 <td width="120">
                     {!! Form::open(['route' => ['inscripcions.destroy', $inscripcion->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

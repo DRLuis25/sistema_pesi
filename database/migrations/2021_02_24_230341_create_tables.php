@@ -25,7 +25,7 @@ class CreateTables extends Migration
             $table->string('nombres');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
-            $table->char('telefono',12);
+            $table->char('telefono',20);
             $table->string('email')->unique();
             $table->string('direccion');
             $table->char('tipo',1);
@@ -36,8 +36,9 @@ class CreateTables extends Migration
             $table->id();
             $table->unsignedBigInteger('personal_id');
             $table->timestamp('fecha_contrato');
-            $table->timestamp('tiempo')->nullable();
+            $table->integer('tiempo')->nullable();
             $table->double('sueldo');
+            $table->char('estado',1)->default('1');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('personal_id','contrato_has_personal')->references('id')->on('personal');
@@ -89,13 +90,8 @@ class CreateTables extends Migration
             $table->softDeletes();
             $table->foreign('personal_id')->references('id')->on('personal');
         });
-        Schema::create('inscripcion', function (Blueprint $table) {
+        Schema::create('propietario', function (Blueprint $table) {
             $table->id();
-            $table->string('tarjeta_propiedad');
-            $table->string('soat_afocat');
-            $table->string('certificado_gps');
-            $table->string('certificado_gas');
-            $table->string('revision_tecnica');
             $table->char('dni',8);
             $table->string('nombre_propietario');
             $table->string('apellidoPaterno_propietario');
@@ -104,11 +100,26 @@ class CreateTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        Schema::create('inscripcion', function (Blueprint $table) {
+            $table->id();
+            $table->string('tarjeta_propiedad')->nullable();;
+            //$table->string('soat_afocat_numero')->nullable();
+            $table->string('soat_afocat')->nullable();
+            $table->string('certificado_gps')->nullable();
+            $table->string('certificado_gas')->nullable();
+            $table->string('revision_tecnica')->nullable();
+            //aqui meter los datos del vehiculo en el crud
+            $table->unsignedBigInteger('propietario_id');
+            $table->char('estado',1)->default('0');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('propietario_id')->references('id')->on('propietario');
+        });
         Schema::create('vehiculo', function (Blueprint $table) {
             $table->id();
             //color, marca, modelo
             $table->string('placa');
-            $table->string('color');
+            $table->string('color')->nullable();
             $table->string('marca');
             $table->string('modelo');
             $table->unsignedBigInteger('inscripcion_id');
@@ -116,29 +127,28 @@ class CreateTables extends Migration
             $table->softDeletes();
             $table->foreign('inscripcion_id')->references('id')->on('inscripcion');
         });
-        Schema::create('propietario', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('inscripcion_id');
-            $table->timestamps();
-            $table->softDeletes();
-            //vehiculo_id?
-            $table->foreign('inscripcion_id')->references('id')->on('inscripcion');
-        });
         Schema::create('ficha_conductor', function (Blueprint $table) {
             $table->id();
-            $table->string('certificado_pnp');
-            $table->string('brevete');
-            $table->string('fotocheck');
+            //Nuevo
+            $table->string('nombres');
+            $table->string('apellidoPaterno');
+            $table->string('apellidoMaterno');
+            $table->string('direccion')->nullable();
+            //old
+            $table->string('certificado_pnp')->nullable();
+            $table->string('brevete_nro');
+            $table->string('brevete')->nullable();
+            $table->string('fotocheck')->nullable();
             $table->char('dni',8);
-            $table->string('recibo');
-            $table->string('foto');
+            $table->string('recibo')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
         Schema::create('conductor', function (Blueprint $table) {
             $table->id();
             $table->timestamp('fecha_contrato');
-            $table->string('observaciones');
+            $table->string('observaciones')->nullable();
             $table->unsignedBigInteger('ficha_conductor_id');
             $table->foreign('ficha_conductor_id')->references('id')->on('ficha_conductor');
             $table->timestamps();
@@ -158,9 +168,9 @@ class CreateTables extends Migration
         Schema::create('inspeccion', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('documento_inscripcion_id');
-            $table->string('observaciones');
+            $table->string('observaciones')->nullable();
             $table->timestamp('fecha');
-            $table->char('estado',1);
+            $table->char('estado',1)->default('1');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('documento_inscripcion_id')->references('id')->on('documento_inscripcion');
@@ -180,6 +190,7 @@ class CreateTables extends Migration
             $table->string('lugar');
             $table->string('duracion');
             $table->string('fecha');
+            $table->char('estado',1)->default('1');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('cliente_id')->references('id')->on('cliente');

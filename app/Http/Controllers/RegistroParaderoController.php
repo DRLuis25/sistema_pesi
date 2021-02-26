@@ -12,6 +12,10 @@ use Response;
 
 class RegistroParaderoController extends AppBaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the RegistroParadero.
      *
@@ -22,7 +26,7 @@ class RegistroParaderoController extends AppBaseController
     public function index(Request $request)
     {
         /** @var RegistroParadero $registroParaderos */
-        $registroParaderos = RegistroParadero::all();
+        $registroParaderos = RegistroParadero::paginate(10);
 
         return view('registro_paraderos.index')
             ->with('registroParaderos', $registroParaderos);

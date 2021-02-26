@@ -1,8 +1,8 @@
 <?php
 
 return array (
-  'singular' => 'Vehiculo',
-  'plural' => 'Vehiculos',
+  'singular' => 'Vehículo',
+  'plural' => 'Vehículos',
   'fields' => 
   array (
     'id' => 'Id',
@@ -10,9 +10,10 @@ return array (
     'color' => 'Color',
     'marca' => 'Marca',
     'modelo' => 'Modelo',
-    'inscripcion_id' => 'Inscripcion Id',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
+    'inscripcion_id' => 'Inscripción',
+    'created_at' => 'Creado el',
+    'updated_at' => 'Actualizado el',
+    'deleted_at' => 'Eliminado el',
+    'propietario' => 'Propietario'
   ),
 );

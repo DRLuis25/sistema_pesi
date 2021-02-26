@@ -8,9 +8,13 @@ use Faker\Generator as Faker;
 $factory->define(Propietario::class, function (Faker $faker) {
 
     return [
-        'inscripcion_id' => $faker->word,
+        'dni' => $faker->dni(),
+        'nombre_propietario' => $faker->firstName,
+        'apellidoPaterno_propietario' => $faker->lastName,
+        'apellidoMaterno_propietario' => $faker->lastName,
+        'telefono_propietario' => $faker->e164PhoneNumber,
         'created_at' => $faker->date('Y-m-d H:i:s'),
-        'updated_at' => $faker->date('Y-m-d H:i:s'),
-        'deleted_at' => $faker->date('Y-m-d H:i:s')
+        'updated_at' => null,
+        'deleted_at' => null
     ];
 });

@@ -25,7 +25,7 @@ class UpdateInscripcionRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Inscripcion::$rules;
+        $rules = Inscripcion::$updateRules;
         
         return $rules;
     }

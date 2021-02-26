@@ -8,20 +8,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Inscripcion
  * @package App\Models
- * @version February 25, 2021, 5:21 pm UTC
+ * @version February 25, 2021, 10:14 pm UTC
  *
- * @property \Illuminate\Database\Eloquent\Collection $propietarios
+ * @property \App\Models\Propietario $propietario
  * @property \Illuminate\Database\Eloquent\Collection $vehiculos
  * @property string $tarjeta_propiedad
+ * @property string $soat_afocat_numero
  * @property string $soat_afocat
  * @property string $certificado_gps
  * @property string $certificado_gas
  * @property string $revision_tecnica
- * @property string $dni
- * @property string $nombre_propietario
- * @property string $apellidoPaterno_propietario
- * @property string $apellidoMaterno_propietario
- * @property string $telefono_propietario
+ * @property integer $propietario_id
+ * @property string $estado
  */
 class Inscripcion extends Model
 {
@@ -39,15 +37,13 @@ class Inscripcion extends Model
 
     public $fillable = [
         'tarjeta_propiedad',
+        //'soat_afocat_numero',
         'soat_afocat',
         'certificado_gps',
         'certificado_gas',
         'revision_tecnica',
-        'dni',
-        'nombre_propietario',
-        'apellidoPaterno_propietario',
-        'apellidoMaterno_propietario',
-        'telefono_propietario'
+        'propietario_id',
+        'estado'
     ];
 
     /**
@@ -58,15 +54,13 @@ class Inscripcion extends Model
     protected $casts = [
         'id' => 'integer',
         'tarjeta_propiedad' => 'string',
+        //'soat_afocat_numero' => 'string',
         'soat_afocat' => 'string',
         'certificado_gps' => 'string',
         'certificado_gas' => 'string',
         'revision_tecnica' => 'string',
-        'dni' => 'string',
-        'nombre_propietario' => 'string',
-        'apellidoPaterno_propietario' => 'string',
-        'apellidoMaterno_propietario' => 'string',
-        'telefono_propietario' => 'string'
+        'propietario_id' => 'integer',
+        'estado' => 'string'
     ];
 
     /**
@@ -75,27 +69,42 @@ class Inscripcion extends Model
      * @var array
      */
     public static $rules = [
-        'tarjeta_propiedad' => 'required|string|max:255',
-        'soat_afocat' => 'required|string|max:255',
-        'certificado_gps' => 'required|string|max:255',
-        'certificado_gas' => 'required|string|max:255',
-        'revision_tecnica' => 'required|string|max:255',
-        'dni' => 'required|string|max:8',
-        'nombre_propietario' => 'required|string|max:255',
-        'apellidoPaterno_propietario' => 'required|string|max:255',
-        'apellidoMaterno_propietario' => 'required|string|max:255',
-        'telefono_propietario' => 'required|string|max:255',
+        'tarjeta_propiedad' => 'nullable|max:255',
+        //'soat_afocat_numero' => 'required|string|max:255',
+        'soat_afocat' => 'nullable|max:255',
+        'certificado_gps' => 'nullable|max:255',
+        'certificado_gas' => 'nullable|max:255',
+        'revision_tecnica' => 'nullable|max:255',
+        'propietario_id' => 'required|unique:inscripcion',
+        'estado' => 'required|string|max:1',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'deleted_at' => 'nullable',
+        'placa' => 'required|string|max:15|min:7',
+        'color' => 'nullable|string|max:255|min:3',
+        'marca' => 'required|string|max:255|min:2',
+        'modelo' => 'required|string|max:255|min:1',
+    ];
+    public static $updateRules = [
+        'tarjeta_propiedad' => 'nullable|max:255',
+        //'soat_afocat_numero' => 'required|string|max:255',
+        'soat_afocat' => 'nullable|max:255',
+        'certificado_gps' => 'nullable|max:255',
+        'certificado_gas' => 'nullable|max:255',
+        'revision_tecnica' => 'nullable|max:255',
+        'propietario_id' => 'required',
+        'estado' => 'required|string|max:1',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function propietarios()
+    public function propietario()
     {
-        return $this->hasMany(\App\Models\Propietario::class, 'inscripcion_id');
+        return $this->belongsTo(\App\Models\Propietario::class, 'propietario_id');
     }
 
     /**

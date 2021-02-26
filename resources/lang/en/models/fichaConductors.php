@@ -1,19 +1,27 @@
 <?php
 
-return array (
-  'singular' => 'FichaConductor',
-  'plural' => 'FichaConductors',
-  'fields' => 
-  array (
-    'id' => 'Id',
-    'certificado_pnp' => 'Certificado Pnp',
-    'brevete' => 'Brevete',
-    'fotocheck' => 'Fotocheck',
-    'dni' => 'Dni',
-    'recibo' => 'Recibo',
-    'foto' => 'Foto',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
-  ),
-);
+    return array (
+      'singular' => 'Ficha Conductor',
+      'plural' => 'Fichas Conductor',
+      'fields' => 
+      array (
+        'id' => 'Id',
+        'certificado_pnp' => 'Certificado PNP',
+        'brevete' => 'Brevete',
+        'brevete_nro' => 'Brevete Nro',
+        'fotocheck' => 'Fotocheck',
+        'dni' => 'DNI',
+        'recibo' => 'Recibo',
+        'foto' => 'Foto',
+        'created_at' => 'Creado el',
+        'updated_at' => 'Actualizado el',
+        'deleted_at' => 'Eliminado el',
+        'nombres' => 'Nombres',
+        'apellidoPaterno' => 'Apellido Paterno',
+        'apellidoMaterno' => 'Apellido Materno',
+        'direccion' => 'Dirección',
+        'fullname' => 'Nombre'
+      ),
+    );
+    
+    

@@ -1,17 +1,19 @@
 <?php
 
 return array (
-  'singular' => 'ContratoPersonal',
-  'plural' => 'ContratoPersonals',
+  'singular' => 'Contratos',
+  'plural' => 'Contratos',
   'fields' => 
   array (
     'id' => 'Id',
-    'personal_id' => 'Personal Id',
+    'personal_id' => 'Personal',
     'fecha_contrato' => 'Fecha Contrato',
-    'tiempo' => 'Tiempo',
+    'tiempo' => 'Duración Contrato',
     'sueldo' => 'Sueldo',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
+    'created_at' => 'Creado el',
+    'updated_at' => 'Actualizado el',
+    'deleted_at' => 'Eliminado el',
+    'contrato' => 'Contrato',
+    'nombres' => 'Nombre Completo'
   ),
 );

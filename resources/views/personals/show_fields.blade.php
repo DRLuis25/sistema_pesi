@@ -37,6 +37,15 @@
 <!-- Tipo Field -->
 <div class="col-sm-12">
     {!! Form::label('tipo', __('models/personals.fields.tipo').':') !!}
-    <p>{{ $personal->tipo }}</p>
+    <p>
+        @if ($personal->tipo=="1")
+            Operadora
+        @elseif($personal->tipo=="2")
+            Gerente
+        @elseif($personal->tipo=="3")
+            Administrador
+        @else
+            No definido
+        @endif
+    </p>
 </div>
-

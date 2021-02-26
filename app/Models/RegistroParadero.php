@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class RegistroParadero
  * @package App\Models
- * @version February 25, 2021, 5:04 pm UTC
+ * @version February 25, 2021, 7:38 pm UTC
  *
  * @property string $descripcion
  * @property string $direccion

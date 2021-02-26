@@ -7,22 +7,16 @@
                 <div class="col-sm-6">
                     <h1>@lang('models/contratoPersonals.plural')</h1>
                 </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
-                       href="{{ route('contratoPersonals.create') }}">
-                       @lang('crud.add_new')
-                    </a>
-                </div>
             </div>
         </div>
     </section>
 
-    <div class="content px-3">
+    <div class="content px-3 ">
 
         @include('flash::message')
 
         <div class="clearfix"></div>
-
+        
         <div class="card">
             <div class="card-body p-0">
                 @include('contrato_personals.table')

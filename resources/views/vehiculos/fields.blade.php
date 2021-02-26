@@ -24,6 +24,6 @@
 
 <!-- Inscripcion Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('inscripcion_id', __('models/vehiculos.fields.inscripcion_id').':') !!}
-    {!! Form::number('inscripcion_id', null, ['class' => 'form-control']) !!}
+    {{-- {!! Form::label('inscripcion_id', __('models/vehiculos.fields.inscripcion_id').':') !!} --}}
+    {!! Form::hidden('inscripcion_id', null, ['class' => 'form-control']) !!}
 </div>

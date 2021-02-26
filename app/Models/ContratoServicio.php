@@ -35,7 +35,8 @@ class ContratoServicio extends Model
         'cliente_id',
         'lugar',
         'duracion',
-        'fecha'
+        'fecha',
+        'estado'
     ];
 
     /**
@@ -48,7 +49,7 @@ class ContratoServicio extends Model
         'cliente_id' => 'integer',
         'lugar' => 'string',
         'duracion' => 'string',
-        'fecha' => 'string'
+        'fecha' => 'string',
     ];
 
     /**
@@ -61,6 +62,7 @@ class ContratoServicio extends Model
         'lugar' => 'required|string|max:255',
         'duracion' => 'required|string|max:255',
         'fecha' => 'required|string|max:255',
+        'estado' => 'string|max:1',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'

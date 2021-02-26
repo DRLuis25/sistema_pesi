@@ -25,9 +25,9 @@
     },
     {
         "name": "color",
-        "dbType": "string,255",
+        "dbType": "string,255:nullable",
         "htmlType": "text",
-        "validations": "required|string|max:255|string|max:255",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
         "searchable": true,
         "fillable": true,
         "primary": false,

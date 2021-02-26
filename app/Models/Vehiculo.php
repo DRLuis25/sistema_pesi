@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Vehiculo
  * @package App\Models
- * @version February 25, 2021, 5:23 pm UTC
+ * @version February 25, 2021, 8:38 pm UTC
  *
  * @property \App\Models\Inscripcion $inscripcion
  * @property \Illuminate\Database\Eloquent\Collection $documentoInscripcions
@@ -61,7 +61,7 @@ class Vehiculo extends Model
      */
     public static $rules = [
         'placa' => 'required|string|max:255',
-        'color' => 'required|string|max:255',
+        'color' => 'nullable|string|max:255',
         'marca' => 'required|string|max:255',
         'modelo' => 'required|string|max:255',
         'inscripcion_id' => 'required',

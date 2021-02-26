@@ -2,15 +2,15 @@
 
 return array (
   'singular' => 'Conductor',
-  'plural' => 'Conductors',
+  'plural' => 'Conductores',
   'fields' => 
   array (
     'id' => 'Id',
-    'fecha_contrato' => 'Fecha Contrato',
+    'fecha_contrato' => 'Fecha de Contrato',
     'observaciones' => 'Observaciones',
-    'ficha_conductor_id' => 'Ficha Conductor Id',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
+    'ficha_conductor_id' => 'Conductor',
+    'created_at' => 'Creado el',
+    'updated_at' => 'Actualizado el',
+    'deleted_at' => 'Eliminado el',
   ),
 );

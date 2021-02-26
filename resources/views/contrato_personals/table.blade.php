@@ -3,19 +3,21 @@
         <thead>
             <tr>
                 <th>@lang('models/contratoPersonals.fields.personal_id')</th>
-        <th>@lang('models/contratoPersonals.fields.fecha_contrato')</th>
-        <th>@lang('models/contratoPersonals.fields.tiempo')</th>
-        <th>@lang('models/contratoPersonals.fields.sueldo')</th>
+                <th>@lang('models/contratoPersonals.fields.fecha_contrato')</th>
+                <th>@lang('models/contratoPersonals.fields.tiempo')</th>
                 <th colspan="3">@lang('crud.action')</th>
             </tr>
         </thead>
         <tbody>
         @foreach($contratoPersonals as $contratoPersonal)
             <tr>
-                <td>{{ $contratoPersonal->personal_id }}</td>
-            <td>{{ $contratoPersonal->fecha_contrato }}</td>
-            <td>{{ $contratoPersonal->tiempo }}</td>
-            <td>{{ $contratoPersonal->sueldo }}</td>
+                <td>
+                    <a href="{{ route('personals.show', [$contratoPersonal->personal->id]) }}">
+                    {{ $contratoPersonal->personal->fullName }}
+                    </a>
+            </td>
+            <td>{{ $contratoPersonal->fecha_contrato->toDateString() }}</td>
+            <td>{{ $contratoPersonal->tiempo }} meses</td>
                 <td width="120">
                     {!! Form::open(['route' => ['contratoPersonals.destroy', $contratoPersonal->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

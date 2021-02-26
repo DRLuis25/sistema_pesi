@@ -1,3 +1,10 @@
+<!-- Inscripcion Id Field -->
+<div class="col-sm-12">
+    {!! Form::label('inscripcion_id', __('models/vehiculos.fields.propietario').':') !!}
+    <p>{{ $vehiculo->inscripcion->propietario->fullName }}</p>
+</div>
+
+
 <!-- Placa Field -->
 <div class="col-sm-12">
     {!! Form::label('placa', __('models/vehiculos.fields.placa').':') !!}
@@ -20,11 +27,5 @@
 <div class="col-sm-12">
     {!! Form::label('modelo', __('models/vehiculos.fields.modelo').':') !!}
     <p>{{ $vehiculo->modelo }}</p>
-</div>
-
-<!-- Inscripcion Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('inscripcion_id', __('models/vehiculos.fields.inscripcion_id').':') !!}
-    <p>{{ $vehiculo->inscripcion_id }}</p>
 </div>
 

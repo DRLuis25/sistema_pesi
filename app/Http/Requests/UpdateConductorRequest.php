@@ -25,7 +25,7 @@ class UpdateConductorRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Conductor::$rules;
+        $rules = Conductor::$updateRules;
         
         return $rules;
     }

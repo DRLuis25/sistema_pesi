@@ -83,13 +83,28 @@ class Personal extends Model
         'nombres' => 'required|string|max:255',
         'apellidoPaterno' => 'required|string|max:255',
         'apellidoMaterno' => 'required|string|max:255',
-        'telefono' => 'required|string|max:12',
+        'telefono' => 'required|string|max:15|min:9',
+        'email' => 'required|string|max:255|unique:personal',
+        'direccion' => 'required|string|max:255',
+        'tipo' => 'required|string|max:1',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable',
+        'fecha_contrato' => 'required',
+        'tiempo' => 'nullable|numeric',
+        'sueldo' => 'required|numeric',
+    ];
+    public static $updateRules = [
+        'nombres' => 'required|string|max:255',
+        'apellidoPaterno' => 'required|string|max:255',
+        'apellidoMaterno' => 'required|string|max:255',
+        'telefono' => 'required|string|max:15|min:9',
         'email' => 'required|string|max:255',
         'direccion' => 'required|string|max:255',
         'tipo' => 'required|string|max:1',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'deleted_at' => 'nullable',
     ];
 
     /**
@@ -218,5 +233,9 @@ class Personal extends Model
     public function reporteSancions()
     {
         return $this->hasMany(\App\Models\ReporteSancion::class, 'personal_id');
+    }
+    public function getFullNameAttribute()
+    {
+        return $this->apellidoPaterno." ".$this->apellidoMaterno.", ".$this->nombres;
     }
 }

@@ -12,6 +12,10 @@ use Response;
 
 class PropietarioController extends AppBaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the Propietario.
      *
@@ -22,7 +26,7 @@ class PropietarioController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Propietario $propietarios */
-        $propietarios = Propietario::all();
+        $propietarios = Propietario::paginate(10);
 
         return view('propietarios.index')
             ->with('propietarios', $propietarios);

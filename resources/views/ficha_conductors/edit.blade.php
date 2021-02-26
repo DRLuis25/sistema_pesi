@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::model($fichaConductor, ['route' => ['fichaConductors.update', $fichaConductor->id], 'method' => 'patch']) !!}
+            {!! Form::model($fichaConductor, ['route' => ['fichaConductors.update', $fichaConductor->id], 'method' => 'patch','enctype'=>'multipart/form-data']) !!}
 
             <div class="card-body">
                 <div class="row">

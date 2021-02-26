@@ -1,7 +1,10 @@
 <!-- Personal Id Field -->
 <div class="col-sm-12">
     {!! Form::label('personal_id', __('models/contratoPersonals.fields.personal_id').':') !!}
-    <p>{{ $contratoPersonal->personal_id }}</p>
+    <p><a href="{{ route('personals.show', [$contratoPersonal->personal->id]) }}">
+        {{ $contratoPersonal->personal->fullName }}
+        </a>
+    </p>
 </div>
 
 <!-- Fecha Contrato Field -->
@@ -13,12 +16,12 @@
 <!-- Tiempo Field -->
 <div class="col-sm-12">
     {!! Form::label('tiempo', __('models/contratoPersonals.fields.tiempo').':') !!}
-    <p>{{ $contratoPersonal->tiempo }}</p>
+    <p>{{ $contratoPersonal->tiempo }} meses</p>
 </div>
 
 <!-- Sueldo Field -->
 <div class="col-sm-12">
     {!! Form::label('sueldo', __('models/contratoPersonals.fields.sueldo').':') !!}
-    <p>{{ $contratoPersonal->sueldo }}</p>
+    <p>{{ number_format($contratoPersonal->sueldo, 2) }}</p>
 </div>
 

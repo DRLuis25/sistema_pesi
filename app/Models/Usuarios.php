@@ -35,7 +35,8 @@ class Usuarios extends Model
         'email',
         'email_verified_at',
         'password',
-        'remember_token'
+        'remember_token',
+        'contrato_personal_id',
     ];
 
     /**
@@ -49,7 +50,8 @@ class Usuarios extends Model
         'email' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'string',
-        'remember_token' => 'string'
+        'remember_token' => 'string',
+        'contrato_personal_id' => 'integer',
     ];
 
     /**
@@ -61,11 +63,17 @@ class Usuarios extends Model
         'name' => 'required|string|max:255',
         'email' => 'required|string|max:255',
         'email_verified_at' => 'nullable',
-        'password' => 'required|string|max:255',
+        'password' => 'required|string|max:255|confirmed',
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
-        'updated_at' => 'nullable'
+        'updated_at' => 'nullable',
+        'contrato_personal_id' => 'required|unique:users',
     ];
-
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function contratos()
+    {
+        return $this->belongsTo(\App\Models\ContratoPersonal::class, 'contrato_personal_id');
+    }
 }

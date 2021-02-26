@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'fichaConductors.store']) !!}
+            {!! Form::open(['route' => 'fichaConductors.store','enctype'=>'multipart/form-data']) !!}
 
             <div class="card-body">
 

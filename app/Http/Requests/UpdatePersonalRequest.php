@@ -25,7 +25,7 @@ class UpdatePersonalRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Personal::$rules;
+        $rules = Personal::$updateRules;
         
         return $rules;
     }

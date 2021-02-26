@@ -6,12 +6,17 @@ use App\Http\Requests\CreateConductorRequest;
 use App\Http\Requests\UpdateConductorRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Conductor;
+use App\Models\FichaConductor;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
 
 class ConductorController extends AppBaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the Conductor.
      *
@@ -22,7 +27,7 @@ class ConductorController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Conductor $conductors */
-        $conductors = Conductor::all();
+        $conductors = Conductor::paginate(10);
 
         return view('conductors.index')
             ->with('conductors', $conductors);
@@ -35,7 +40,8 @@ class ConductorController extends AppBaseController
      */
     public function create()
     {
-        return view('conductors.create');
+        $fichaConductores = FichaConductor::all();
+        return view('conductors.create',compact('fichaConductores'));
     }
 
     /**
@@ -89,14 +95,14 @@ class ConductorController extends AppBaseController
     {
         /** @var Conductor $conductor */
         $conductor = Conductor::find($id);
-
+        $fichaConductores = FichaConductor::all();
         if (empty($conductor)) {
             Flash::error(__('messages.not_found', ['model' => __('models/conductors.singular')]));
 
             return redirect(route('conductors.index'));
         }
 
-        return view('conductors.edit')->with('conductor', $conductor);
+        return view('conductors.edit',compact('fichaConductores'))->with('conductor', $conductor);
     }
 
     /**

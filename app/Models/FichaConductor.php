@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class FichaConductor
  * @package App\Models
- * @version February 25, 2021, 5:21 pm UTC
+ * @version February 25, 2021, 8:35 pm UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection $conductors
  * @property string $certificado_pnp
+ * @property string $brevete_nro
  * @property string $brevete
  * @property string $fotocheck
  * @property string $dni
@@ -31,14 +32,19 @@ class FichaConductor extends Model
     protected $dates = ['deleted_at'];
 
 
-
+    protected $appends = ['full_name'];
     public $fillable = [
         'certificado_pnp',
+        'brevete_nro',
         'brevete',
         'fotocheck',
         'dni',
         'recibo',
-        'foto'
+        'foto',
+        'nombres',
+        'apellidoPaterno',
+        'apellidoMaterno',
+        'direccion',
     ];
 
     /**
@@ -49,11 +55,16 @@ class FichaConductor extends Model
     protected $casts = [
         'id' => 'integer',
         'certificado_pnp' => 'string',
+        'brevete_nro' => 'string',
         'brevete' => 'string',
         'fotocheck' => 'string',
         'dni' => 'string',
         'recibo' => 'string',
-        'foto' => 'string'
+        'foto' => 'string',
+        'nombres' => 'string',
+        'apellidoPaterno' => 'string',
+        'apellidoMaterno' => 'string',
+        'direccion' => 'string',
     ];
 
     /**
@@ -62,15 +73,20 @@ class FichaConductor extends Model
      * @var array
      */
     public static $rules = [
-        'certificado_pnp' => 'required|string|max:255',
-        'brevete' => 'required|string|max:255',
-        'fotocheck' => 'required|string|max:255',
-        'dni' => 'required|string|max:8',
-        'recibo' => 'required|string|max:255',
-        'foto' => 'required|string|max:255',
+        'certificado_pnp' => 'nullable',
+        'brevete_nro' => 'required',
+        'brevete' => 'nullable',
+        'fotocheck' => 'nullable',
+        'dni' => 'required|string|min:8|max:8',
+        'recibo' => 'nullable',
+        'foto' => 'nullable',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'deleted_at' => 'nullable',
+        'nombres' => 'string|min:4',
+        'apellidoPaterno' => 'string|min:4',
+        'apellidoMaterno' => 'string|min:4',
+        'direccion' => 'string|nullable',
     ];
 
     /**
@@ -79,5 +95,10 @@ class FichaConductor extends Model
     public function conductors()
     {
         return $this->hasMany(\App\Models\Conductor::class, 'ficha_conductor_id');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->apellidoPaterno." ".$this->apellidoMaterno.", ".$this->nombres;
     }
 }

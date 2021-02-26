@@ -1,60 +1,70 @@
+
+<!-- Propietario Id Field -->
+<div class="col-sm-12">
+    {!! Form::label('propietario_id', __('models/inscripcions.fields.propietario_id').':') !!}
+    <p>
+        <a href="{{ route('propietarios.show', [$inscripcion->propietario->id]) }}" style=" color: inherit;text-decoration: none">{{ $inscripcion->propietario->fullName }}</a>
+    </p>
+</div>
+
 <!-- Tarjeta Propiedad Field -->
 <div class="col-sm-12">
     {!! Form::label('tarjeta_propiedad', __('models/inscripcions.fields.tarjeta_propiedad').':') !!}
-    <p>{{ $inscripcion->tarjeta_propiedad }}</p>
+    <p>@if ($inscripcion->tarjeta_propiedad!=null)
+        <a href="{{ $inscripcion->tarjeta_propiedad }}" style=" color: inherit;text-decoration: none">ver tarjeta propiedad</a>
+    @else
+        <p>sin tarjeta propiedad</p>
+    @endif</p>
 </div>
-
 <!-- Soat Afocat Field -->
 <div class="col-sm-12">
     {!! Form::label('soat_afocat', __('models/inscripcions.fields.soat_afocat').':') !!}
-    <p>{{ $inscripcion->soat_afocat }}</p>
+    <p>@if ($inscripcion->soat_afocat!=null)
+        <a href="{{ $inscripcion->soat_afocat }}" style=" color: inherit;text-decoration: none">ver SOAT / AFOCAT</a>
+    @else
+        <p>sin SOAT / AFOCAT</p>
+    @endif</p>
 </div>
 
 <!-- Certificado Gps Field -->
 <div class="col-sm-12">
     {!! Form::label('certificado_gps', __('models/inscripcions.fields.certificado_gps').':') !!}
-    <p>{{ $inscripcion->certificado_gps }}</p>
+    <p>@if ($inscripcion->certificado_gps!=null)
+        <a href="{{ $inscripcion->certificado_gps }}" style=" color: inherit;text-decoration: none">ver Certificado GPS</a>
+    @else
+        <p>sin Certificado GPS</p>
+    @endif</p>
 </div>
 
 <!-- Certificado Gas Field -->
 <div class="col-sm-12">
     {!! Form::label('certificado_gas', __('models/inscripcions.fields.certificado_gas').':') !!}
-    <p>{{ $inscripcion->certificado_gas }}</p>
+    <p>@if ($inscripcion->certificado_gas!=null)
+        <a href="{{ $inscripcion->certificado_gas }}" style=" color: inherit;text-decoration: none">ver Certificado Gas</a>
+    @else
+        <p>sin Certificado Gas</p>
+    @endif</p>
 </div>
 
 <!-- Revision Tecnica Field -->
 <div class="col-sm-12">
     {!! Form::label('revision_tecnica', __('models/inscripcions.fields.revision_tecnica').':') !!}
-    <p>{{ $inscripcion->revision_tecnica }}</p>
+    <p>@if ($inscripcion->revision_tecnica!=null)
+        <a href="{{ $inscripcion->revision_tecnica }}" style=" color: inherit;text-decoration: none">ver revisión técnica</a>
+    @else
+        <p>sin revisión técnica</p>
+    @endif</p>
 </div>
 
-<!-- Dni Field -->
+<!-- Estado Field -->
 <div class="col-sm-12">
-    {!! Form::label('dni', __('models/inscripcions.fields.dni').':') !!}
-    <p>{{ $inscripcion->dni }}</p>
-</div>
-
-<!-- Nombre Propietario Field -->
-<div class="col-sm-12">
-    {!! Form::label('nombre_propietario', __('models/inscripcions.fields.nombre_propietario').':') !!}
-    <p>{{ $inscripcion->nombre_propietario }}</p>
-</div>
-
-<!-- Apellidopaterno Propietario Field -->
-<div class="col-sm-12">
-    {!! Form::label('apellidoPaterno_propietario', __('models/inscripcions.fields.apellidoPaterno_propietario').':') !!}
-    <p>{{ $inscripcion->apellidoPaterno_propietario }}</p>
-</div>
-
-<!-- Apellidomaterno Propietario Field -->
-<div class="col-sm-12">
-    {!! Form::label('apellidoMaterno_propietario', __('models/inscripcions.fields.apellidoMaterno_propietario').':') !!}
-    <p>{{ $inscripcion->apellidoMaterno_propietario }}</p>
-</div>
-
-<!-- Telefono Propietario Field -->
-<div class="col-sm-12">
-    {!! Form::label('telefono_propietario', __('models/inscripcions.fields.telefono_propietario').':') !!}
-    <p>{{ $inscripcion->telefono_propietario }}</p>
+    {!! Form::label('estado', __('models/inscripcions.fields.estado').':') !!}
+    <p>
+        @if ($inscripcion->estado==1)
+            Aprobado
+        @else
+            No Aprobado
+        @endif
+    </p>
 </div>
 

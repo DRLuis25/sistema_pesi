@@ -2,14 +2,18 @@
     <table class="table" id="propietarios-table">
         <thead>
             <tr>
-                <th>@lang('models/propietarios.fields.inscripcion_id')</th>
+                <th>@lang('models/propietarios.fields.dni')</th>
+                <th>@lang('models/propietarios.fields.propietario')</th>
+                <th>@lang('models/propietarios.fields.telefono_propietario')</th>
                 <th colspan="3">@lang('crud.action')</th>
             </tr>
         </thead>
         <tbody>
         @foreach($propietarios as $propietario)
             <tr>
-                <td>{{ $propietario->inscripcion_id }}</td>
+                <td>{{ $propietario->dni }}</td>
+            <td>{{ $propietario->FullName }}</td>
+            <td>{{ $propietario->telefono_propietario }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['propietarios.destroy', $propietario->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

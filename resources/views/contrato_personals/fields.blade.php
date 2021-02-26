@@ -1,15 +1,17 @@
 <!-- Personal Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('personal_id', __('models/contratoPersonals.fields.personal_id').':') !!}
-    {!! Form::number('personal_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('personal_id', __('models/contratoPersonals.fields.nombres').':') !!}
+    <p>{{$contratoPersonal->personal->fullName}}</p>
 </div>
 
 <!-- Fecha Contrato Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('fecha_contrato', __('models/contratoPersonals.fields.fecha_contrato').':') !!}
-    {!! Form::date('fecha_contrato', null, ['class' => 'form-control','id'=>'fecha_contrato']) !!}
+    {!! Form::label('fecha_contrato', __('models/conductors.fields.fecha_contrato').':') !!}
+    <input type="date" name="fecha_contrato" id="fecha_contrato" class="form-control"  @isset($contratoPersonal) value="{{$contratoPersonal->fecha_contrato->toDateString()}}" disabled @endisset>
+    @isset($contratoPersonal)
+        {!! Form::hidden('fecha_contrato', $contratoPersonal->fecha_contrato) !!}
+    @endisset
 </div>
-
 @push('scripts')
     <script type="text/javascript">
         $('#fecha_contrato').datetimepicker({
@@ -22,7 +24,7 @@
 <!-- Tiempo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tiempo', __('models/contratoPersonals.fields.tiempo').':') !!}
-    {!! Form::date('tiempo', null, ['class' => 'form-control','id'=>'tiempo']) !!}
+    {!! Form::number('tiempo', null, ['class' => 'form-control','id'=>'tiempo']) !!}
 </div>
 
 @push('scripts')

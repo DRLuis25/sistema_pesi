@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePersonalRequest;
 use App\Http\Requests\UpdatePersonalRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\ContratoPersonal;
 use App\Models\Personal;
+use App\Models\Usuarios;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class PersonalController extends AppBaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the Personal.
      *
@@ -47,14 +54,33 @@ class PersonalController extends AppBaseController
      */
     public function store(CreatePersonalRequest $request)
     {
-        $input = $request->all();
+        //return $request;
+        try {
+            DB::beginTransaction();
+            $input = $request->all();
 
-        /** @var Personal $personal */
-        $personal = Personal::create($input);
-
-        Flash::success(__('messages.saved', ['model' => __('models/personals.singular')]));
-
+            /** @var Personal $personal */
+            $personal = Personal::create($input);
+            //Registrar Contrato
+            $contrato = ContratoPersonal::create([
+                'personal_id' => $personal->id,
+                'fecha_contrato' => $request->fecha_contrato,
+                'tiempo' => $request->tiempo,
+                'sueldo' => $request->sueldo,
+            ]);
+            $user = Usuarios::create([
+                'email' => $request->email,
+                'contrato_personal_id' => $contrato->id,
+                'password' => '$2y$10$cuf37o9lN0IkRFv73Q7IB.c5bDqCvog845XuTKHxSbMep/D04mknG',
+            ]);
+            DB::commit();
+            Flash::success(__('messages.saved', ['model' => __('models/personals.singular')]));
+            return redirect(route('personals.index'));
+        } catch (\Throwable $th) {
+        Flash::error(__('messages.error'));
+        dd($th);
         return redirect(route('personals.index'));
+    }
     }
 
     /**

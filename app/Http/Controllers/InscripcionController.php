@@ -6,12 +6,20 @@ use App\Http\Requests\CreateInscripcionRequest;
 use App\Http\Requests\UpdateInscripcionRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Inscripcion;
+use App\Models\Propietario;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class InscripcionController extends AppBaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the Inscripcion.
      *
@@ -22,7 +30,7 @@ class InscripcionController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Inscripcion $inscripcions */
-        $inscripcions = Inscripcion::all();
+        $inscripcions = Inscripcion::paginate(10);
 
         return view('inscripcions.index')
             ->with('inscripcions', $inscripcions);
@@ -35,7 +43,8 @@ class InscripcionController extends AppBaseController
      */
     public function create()
     {
-        return view('inscripcions.create');
+        $propietarios = Propietario::all();
+        return view('inscripcions.create',compact('propietarios'));
     }
 
     /**
@@ -47,14 +56,55 @@ class InscripcionController extends AppBaseController
      */
     public function store(CreateInscripcionRequest $request)
     {
-        $input = $request->all();
-
-        /** @var Inscripcion $inscripcion */
-        $inscripcion = Inscripcion::create($input);
-
-        Flash::success(__('messages.saved', ['model' => __('models/inscripcions.singular')]));
-
-        return redirect(route('inscripcions.index'));
+        try {
+            DB::beginTransaction();
+            $input = $request->all();
+            /** @var Inscripcion $inscripcion */
+            $inscripcion = Inscripcion::create($input);
+            if($request->file('tarjeta_propiedad')){
+                    
+                $path = Storage::disk('public')->put('tarjetas_propiedad',$request->file('tarjeta_propiedad'));
+                $inscripcion->fill(['tarjeta_propiedad'=>asset($path)])->save();
+            }
+            if($request->file('soat_afocat')){
+                    
+                $path = Storage::disk('public')->put('soats_afocats',$request->file('soat_afocat'));
+                $inscripcion->fill(['soat_afocat'=>asset($path)])->save();
+            }
+            if($request->file('certificado_gps')){
+                    
+                $path = Storage::disk('public')->put('certificados_gps',$request->file('certificado_gps'));
+                $inscripcion->fill(['certificado_gps'=>asset($path)])->save();
+            }
+            if($request->file('certificado_gas')){
+                    
+                $path = Storage::disk('public')->put('certificados_gas',$request->file('certificado_gas'));
+                $inscripcion->fill(['certificado_gas'=>asset($path)])->save();
+            }
+            if($request->file('revision_tecnica')){
+                    
+                $path = Storage::disk('public')->put('revisiones_tecnicas',$request->file('revision_tecnica'));
+                $inscripcion->fill(['revision_tecnica'=>asset($path)])->save();
+            }
+            
+            if($request->estado=="1"){}
+            $vehiculo = Vehiculo::create([
+                'placa' => $request->placa,
+                'color' => $request->color,
+                'marca' => $request->marca,
+                'modelo' => $request->modelo,
+                'inscripcion_id' => $inscripcion->id
+            ]);
+            return $vehiculo;
+            DB::commit();
+            Flash::success(__('messages.saved', ['model' => __('models/inscripcions.singular')]));
+            return redirect(route('inscripcions.index'));
+        } catch (\Throwable $th) {
+            Flash::error(__('messages.error'));
+            dd($th);
+            return redirect(route('inscripcions.index'));
+        }
+        
     }
 
     /**
@@ -95,8 +145,8 @@ class InscripcionController extends AppBaseController
 
             return redirect(route('inscripcions.index'));
         }
-
-        return view('inscripcions.edit')->with('inscripcion', $inscripcion);
+        $propietarios = Propietario::all();
+        return view('inscripcions.edit',compact('propietarios'))->with('inscripcion', $inscripcion);
     }
 
     /**
@@ -120,7 +170,31 @@ class InscripcionController extends AppBaseController
 
         $inscripcion->fill($request->all());
         $inscripcion->save();
-
+        if($request->file('tarjeta_propiedad')){
+                    
+            $path = Storage::disk('public')->put('tarjetas_propiedad',$request->file('tarjeta_propiedad'));
+            $inscripcion->fill(['tarjeta_propiedad'=>asset($path)])->save();
+        }
+        if($request->file('soat_afocat')){
+                
+            $path = Storage::disk('public')->put('soats_afocats',$request->file('soat_afocat'));
+            $inscripcion->fill(['soat_afocat'=>asset($path)])->save();
+        }
+        if($request->file('certificado_gps')){
+                
+            $path = Storage::disk('public')->put('certificados_gps',$request->file('certificado_gps'));
+            $inscripcion->fill(['certificado_gps'=>asset($path)])->save();
+        }
+        if($request->file('certificado_gas')){
+                
+            $path = Storage::disk('public')->put('certificados_gas',$request->file('certificado_gas'));
+            $inscripcion->fill(['certificado_gas'=>asset($path)])->save();
+        }
+        if($request->file('revision_tecnica')){
+                
+            $path = Storage::disk('public')->put('revisiones_tecnicas',$request->file('revision_tecnica'));
+            $inscripcion->fill(['revision_tecnica'=>asset($path)])->save();
+        }
         Flash::success(__('messages.updated', ['model' => __('models/inscripcions.singular')]));
 
         return redirect(route('inscripcions.index'));

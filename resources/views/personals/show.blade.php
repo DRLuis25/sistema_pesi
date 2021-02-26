@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="{{ route('personals.index') }}">
+                       href="{{ url()->previous() }}">
                         @lang('crud.back')
                     </a>
                 </div>

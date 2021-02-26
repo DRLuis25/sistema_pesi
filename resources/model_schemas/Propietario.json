@@ -12,10 +12,58 @@
         "inView": false
     },
     {
-        "name": "inscripcion_id",
-        "dbType": "bigInteger,false,true",
-        "htmlType": null,
-        "validations": "required",
+        "name": "dni",
+        "dbType": "string,8",
+        "htmlType": "text",
+        "validations": "required|string|max:8|string|max:8",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "nombre_propietario",
+        "dbType": "string,255",
+        "htmlType": "text",
+        "validations": "required|string|max:255|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "apellidoPaterno_propietario",
+        "dbType": "string,255",
+        "htmlType": "text",
+        "validations": "required|string|max:255|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "apellidoMaterno_propietario",
+        "dbType": "string,255",
+        "htmlType": "text",
+        "validations": "required|string|max:255|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "telefono_propietario",
+        "dbType": "string,255",
+        "htmlType": "text",
+        "validations": "required|string|max:255|string|max:255",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -61,10 +109,10 @@
     },
     {
         "type": "relation",
-        "relation": "mt1,Inscripcion,inscripcion_id"
+        "relation": "1tm,DocumentoInscripcion,propietario_id"
     },
     {
         "type": "relation",
-        "relation": "1tm,DocumentoInscripcion,propietario_id"
+        "relation": "1tm,Inscripcion,propietario_id"
     }
 ]

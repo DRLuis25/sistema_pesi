@@ -2,22 +2,20 @@
 
 return array (
   'singular' => 'Inscripcion',
-  'plural' => 'Inscripcions',
+  'plural' => 'Inscripciones',
   'fields' => 
   array (
     'id' => 'Id',
     'tarjeta_propiedad' => 'Tarjeta Propiedad',
-    'soat_afocat' => 'Soat Afocat',
-    'certificado_gps' => 'Certificado Gps',
-    'certificado_gas' => 'Certificado Gas',
+    'soat_afocat_numero' => 'SOAT / AFOCAT',
+    'soat_afocat' => 'Copia SOAT / AFOCAT',
+    'certificado_gps' => 'Certificado GPS',
+    'certificado_gas' => 'Certificado GAS',
     'revision_tecnica' => 'Revision Tecnica',
-    'dni' => 'Dni',
-    'nombre_propietario' => 'Nombre Propietario',
-    'apellidoPaterno_propietario' => 'Apellidopaterno Propietario',
-    'apellidoMaterno_propietario' => 'Apellidomaterno Propietario',
-    'telefono_propietario' => 'Telefono Propietario',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'deleted_at' => 'Deleted At',
+    'propietario_id' => 'Propietario',
+    'estado' => 'Estado',
+    'created_at' => 'Creado el',
+    'updated_at' => 'Actualizado el',
+    'deleted_at' => 'Eliminado el',
   ),
 );

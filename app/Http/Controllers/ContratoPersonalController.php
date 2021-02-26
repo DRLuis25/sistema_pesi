@@ -12,6 +12,10 @@ use Response;
 
 class ContratoPersonalController extends AppBaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the ContratoPersonal.
      *
@@ -22,7 +26,7 @@ class ContratoPersonalController extends AppBaseController
     public function index(Request $request)
     {
         /** @var ContratoPersonal $contratoPersonals */
-        $contratoPersonals = ContratoPersonal::all();
+        $contratoPersonals = ContratoPersonal::all();//where('estado','=','1')->get();
 
         return view('contrato_personals.index')
             ->with('contratoPersonals', $contratoPersonals);

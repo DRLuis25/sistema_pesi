@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class ContratoPersonal
  * @package App\Models
- * @version February 25, 2021, 5:26 pm UTC
+ * @version February 25, 2021, 8:39 pm UTC
  *
  * @property \App\Models\Personal $personal
  * @property integer $personal_id
@@ -34,7 +34,8 @@ class ContratoPersonal extends Model
         'personal_id',
         'fecha_contrato',
         'tiempo',
-        'sueldo'
+        'sueldo',
+        'estado'
     ];
 
     /**
@@ -46,8 +47,9 @@ class ContratoPersonal extends Model
         'id' => 'integer',
         'personal_id' => 'integer',
         'fecha_contrato' => 'datetime',
-        'tiempo' => 'datetime',
-        'sueldo' => 'float'
+        'tiempo' => 'integer',
+        'sueldo' => 'float',
+        'estado' => 'string'
     ];
 
     /**
@@ -58,11 +60,12 @@ class ContratoPersonal extends Model
     public static $rules = [
         'personal_id' => 'required',
         'fecha_contrato' => 'required',
-        'tiempo' => 'nullable',
+        'tiempo' => 'nullable|numeric',
         'sueldo' => 'required|numeric',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'deleted_at' => 'nullable',
+        'estado' => 'nullable'
     ];
 
     /**
