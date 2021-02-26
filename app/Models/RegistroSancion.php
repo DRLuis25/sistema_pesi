@@ -20,7 +20,7 @@ class RegistroSancion extends Model
 {
     use SoftDeletes;
 
-    public $table = 'registro_sancion';
+    public $table = 'registro_sanciones';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';

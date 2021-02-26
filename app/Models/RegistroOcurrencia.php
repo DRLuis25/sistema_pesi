@@ -19,7 +19,7 @@ class RegistroOcurrencia extends Model
 {
     use SoftDeletes;
 
-    public $table = 'registro_ocurrencia';
+    public $table = 'registro_ocurrencias';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -64,8 +64,12 @@ class RegistroOcurrencia extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
+
+    
+     
     public function personal()
     {
         return $this->belongsTo(\App\Models\Personal::class, 'personal_id');
     }
+
 }

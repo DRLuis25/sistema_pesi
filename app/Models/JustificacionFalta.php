@@ -19,7 +19,7 @@ class JustificacionFalta extends Model
 {
     use SoftDeletes;
 
-    public $table = 'justificacion_falta';
+    public $table = 'justificación_falta';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
