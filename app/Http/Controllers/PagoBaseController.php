@@ -27,6 +27,23 @@ class PagoBaseController extends Controller
 
     public function store(Request $request)
     {
+        $data=request()->validate([
+            'monto' => 'required',
+            'descripcion' => 'required|min:8|regex:/^[a-zA-Z\s]+$/u',
+            'personal' => 'required|not_in:0',
+            'conductor' => 'required|not_in:0'
+        ],
+        [
+            'monto.required' => 'Ingrese monto de pago',
+            'descripcion.required' => 'Ingrese descripcion',
+            'descripcion.regex' => 'Ingrese solo caracteres',
+            'descripcion.min'=> 'Descripcion muy corta',
+            'personal.required' => 'Ingrese personal',
+            'personal.not_in'=> 'Seleccione un personal',
+            'conductor.required' => 'Ingrese personal',
+            'conductor.not_in'=> 'Seleccione un personal'
+        ]);
+
         $pagobase = new RegistroPagoBase;
 
         $date = Carbon::now();
@@ -60,6 +77,23 @@ class PagoBaseController extends Controller
 
     public function update(Request $request, $id)
     {
+        $data=request()->validate([
+            'monto' => 'required',
+            'descripcion' => 'required|min:8|regex:/^[a-zA-Z\s]+$/u',
+            'personal' => 'required|not_in:0',
+            'conductor' => 'required|not_in:0'
+        ],
+        [
+            'monto.required' => 'Ingrese monto de pago',
+            'descripcion.required' => 'Ingrese descripcion',
+            'descripcion.regex' => 'Ingrese solo caracteres',
+            'descripcion.min'=> 'Descripcion muy corta',
+            'personal.required' => 'Ingrese personal',
+            'personal.not_in'=> 'Seleccione un personal',
+            'conductor.required' => 'Ingrese personal',
+            'conductor.not_in'=> 'Seleccione un personal'
+        ]);
+
         $pagobase = RegistroPagoBase::where('id','=',$id)->first();
 
         $pagobase->monto = $request->monto;

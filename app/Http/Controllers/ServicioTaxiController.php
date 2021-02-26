@@ -24,6 +24,14 @@ class ServicioTaxiController extends Controller
 
     public function store(Request $request)
     {
+        $data=request()->validate([
+            'cliente' => 'required|not_in:0'
+        ],
+        [
+            'cliente.required' => 'Ingrese cliente',
+            'cliente.not_in'=> 'Seleccione un cliente'
+        ]);
+
         $taxi = new RegistroServicioTaxi;
 
         $taxi->cliente_id = $request->cliente;
@@ -50,6 +58,14 @@ class ServicioTaxiController extends Controller
 
     public function update(Request $request, $id)
     {
+        $data=request()->validate([
+            'cliente' => 'required|not_in:0'
+        ],
+        [
+            'cliente.required' => 'Ingrese cliente',
+            'cliente.not_in'=> 'Seleccione un cliente'
+        ]);
+
         $taxi = RegistroServicioTaxi::where('id','=',$id)->first();
 
         $taxi->cliente_id = $request->cliente;

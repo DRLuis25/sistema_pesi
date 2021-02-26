@@ -26,19 +26,29 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-3">
                     <h5>Descripcion :</h5>
-                    <textarea name="descripcion" id="" cols="50" rows="3" placeholder="Ingrese Descripcion ..."></textarea>
+                    <textarea class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="" cols="50" rows="3" placeholder="Ingrese Descripcion ..."></textarea>
+                    @error('descripcion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="row" style="margin-top: 30px">
                 <div class="col-md-4"></div>
                 <div class="col-md-3">
                     <h5>Personal :</h5>
-                    <select class="select" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="sancion" name="sancion" data-live-search="true">
+                    <select class="select @error('sancion') is-invalid @enderror" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="sancion" name="sancion" data-live-search="true">
                         <option value="0" selected>- Seleccione Personal -</option>          
                             @foreach($registrosanciones as $item)
                                 <option value="{{ $item->id }}" >{{ $item->personal->nombres." ".$item->personal->apellidoPaterno." ".$item->personal->apellidoMaterno }}</option>                                 
                             @endforeach    
                     </select>
+                    @error('sancion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="col-md-12 text-center" style="margin-top: 40px">

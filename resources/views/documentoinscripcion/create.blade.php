@@ -26,34 +26,49 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-3">
                     <h5>Conductor :</h5>
-                    <select class="select" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="conductor" name="conductor" data-live-search="true">
+                    <select class="select @error('conductor') is-invalid @enderror" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="conductor" name="conductor" data-live-search="true">
                         <option value="0" selected>- Seleccione Conductor -</option>          
                             @foreach($conductor as $item)
                                 <option value="{{ $item->id }}" >{{ $item->dni }}</option>                                 
                             @endforeach    
                     </select>
+                    @error('conductor')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-md-2"></div>
                 <div class="col-md-3">
                     <h5>Propietario :</h5>
-                    <select class="select" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="propietario" name="propietario" data-live-search="true">
+                    <select class="select @error('propietario') is-invalid @enderror" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="propietario" name="propietario" data-live-search="true">
                         <option value="0" selected>- Seleccione Propietario -</option>          
                             @foreach($propietario as $item)
                                 <option value="{{ $item->id }}" >{{ $item->inscripcion->nombre_propietario." ".$item->inscripcion->apellidoPaterno_propietario." ".$item->inscripcion->apellidoMaterno_propietario }}</option>                                 
                             @endforeach    
                     </select>
+                    @error('propietario')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="row" style="margin-top: 30px">
                 <div class="col-md-4"></div>
                 <div class="col-md-3">
                     <h5>Vehiculo :</h5>
-                    <select class="select" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="vehiculo" name="vehiculo" data-live-search="true">
+                    <select class="select @error('vehiculo') is-invalid @enderror" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="vehiculo" name="vehiculo" data-live-search="true">
                         <option value="0" selected>- Seleccione Personal -</option>          
                             @foreach($vehiculo as $item)
                                 <option value="{{ $item->id }}" >{{ $item->modelo }}</option>                                 
-                            @endforeach    
+                            @endforeach  
                     </select>
+                    @error('vehiculo')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{$message}}</strong>
+                        </span>
+                    @enderror  
                 </div>
             </div>
             <div class="col-md-12 text-center" style="margin-top: 40px">

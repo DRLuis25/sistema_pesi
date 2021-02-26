@@ -29,6 +29,20 @@ class DocumentoInscripcionController extends Controller
 
     public function store(Request $request)
     {
+        $data=request()->validate([
+            'conductor' => 'required|not_in:0',
+            'propietario' => 'required|not_in:0',
+            'vehiculo' => 'required|not_in:0'
+        ],
+        [
+            'conductor.required' => 'Ingrese conductor',
+            'conductor.not_in'=> 'Seleccione un conductor',
+            'propietario.required' => 'Ingrese propietario',
+            'propietario.not_in'=> 'Seleccione un propietario',
+            'vehiculo.required' => 'Ingrese vehiculo',
+            'vehiculo.not_in'=> 'Seleccione un vehiculo'
+        ]);
+
         $documento = new DocumentoInscripcion;
 
         $documento->conductor_id = $request->conductor;
@@ -59,6 +73,20 @@ class DocumentoInscripcionController extends Controller
 
     public function update(Request $request, $id)
     {
+        $data=request()->validate([
+            'conductor' => 'required|not_in:0',
+            'propietario' => 'required|not_in:0',
+            'vehiculo' => 'required|not_in:0'
+        ],
+        [
+            'conductor.required' => 'Ingrese conductor',
+            'conductor.not_in'=> 'Seleccione un conductor',
+            'propietario.required' => 'Ingrese propietario',
+            'propietario.not_in'=> 'Seleccione un propietario',
+            'vehiculo.required' => 'Ingrese vehiculo',
+            'vehiculo.not_in'=> 'Seleccione un vehiculo'
+        ]);
+        
         $documento = DocumentoInscripcion::where('id','=',$id)->first();
 
         $documento->conductor_id = $request->conductor;

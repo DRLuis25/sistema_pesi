@@ -25,6 +25,21 @@ class ReclamoController extends Controller
 
     public function store(Request $request)
     {
+        $data=request()->validate([
+            'descripcion' => 'required|min:8|regex:/^[a-zA-Z\s]+$/u',
+            'personal' => 'required|not_in:0',
+            'cliente' => 'required|not_in:0'
+        ],
+        [
+            'descripcion.required' => 'Ingrese descripcion',
+            'descripcion.regex' => 'Ingrese solo caracteres',
+            'descripcion.min'=> 'Descripcion muy corta',
+            'personal.required' => 'Ingrese personal',
+            'personal.not_in'=> 'Seleccione un personal',
+            'cliente.required' => 'Ingrese cliente',
+            'cliente.not_in'=> 'Seleccione un cliente'
+        ]);
+
         $reclamo = new Reclamo;
 
         $reclamo->descripcion = $request->descripcion;
@@ -54,6 +69,21 @@ class ReclamoController extends Controller
 
     public function update(Request $request, $id)
     {
+        $data=request()->validate([
+            'descripcion' => 'required|min:8|regex:/^[a-zA-Z\s]+$/u',
+            'personal' => 'required|not_in:0',
+            'cliente' => 'required|not_in:0'
+        ],
+        [
+            'descripcion.required' => 'Ingrese descripcion',
+            'descripcion.regex' => 'Ingrese solo caracteres',
+            'descripcion.min'=> 'Descripcion muy corta',
+            'personal.required' => 'Ingrese personal',
+            'personal.not_in'=> 'Seleccione un personal',
+            'cliente.required' => 'Ingrese cliente',
+            'cliente.not_in'=> 'Seleccione un cliente'
+        ]);
+
         $reclamo = Reclamo::where('id','=',$id)->first();
 
         $reclamo->descripcion = $request->descripcion;

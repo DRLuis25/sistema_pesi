@@ -25,6 +25,18 @@ class JustificacionFaltaController extends Controller
 
     public function store(Request $request)
     {
+        $data=request()->validate([
+            'descripcion' => 'required|min:8|regex:/^[a-zA-Z\s]+$/u',
+            'sancion' => 'required|not_in:0'
+        ],
+        [
+            'descripcion.required' => 'Ingrese descripcion',
+            'descripcion.regex' => 'Ingrese solo caracteres',
+            'descripcion.min'=> 'Descripcion muy corta',
+            'sancion.required' => 'Ingrese personal',
+            'sancion.not_in'=> 'Seleccione un personal'
+        ]);
+
         $falta = new JustificacionFalta;
 
         $date = Carbon::now();
@@ -55,6 +67,19 @@ class JustificacionFaltaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $data=request()->validate([
+            'descripcion' => 'required|min:8|regex:/^[a-zA-Z\s]+$/u',
+            'sancion' => 'required|not_in:0'
+        ],
+        [
+            'descripcion.required' => 'Ingrese descripcion',
+            'descripcion.regex' => 'Ingrese solo caracteres',
+            'descripcion.min'=> 'Descripcion muy corta',
+            'sancion.required' => 'Ingrese personal',
+            'sancion.not_in'=> 'Seleccione un personal'
+        ]);
+
+
         $falta = JustificacionFalta::where('id','=',$id)->first();
 
         $falta->descripcion = $request->descripcion;
